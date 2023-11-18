@@ -116,26 +116,26 @@ const GradeCalculator = () => {
     const data = getDataByGrade(grade);
     return data.reduce((total, row) => total + (row.total || 0), 0);
   };
-  
+
   const calculateAverage = (grade) => {
     const data = getDataByGrade(grade);
-  
+
     // Filter out rows with Credits equal to 1
     const filteredData = data.filter((row) => parseInt(row.credits) !== 1);
-  
+
     // Calculate total credits and total points for the filtered data
     const totalCredits = filteredData.reduce((total, row) => parseInt(total) + parseInt(row.credits || 0), 0);
     const totalPoints = filteredData.reduce((total, row) => parseInt(total) + parseInt(row.total || 0), 0);
-  
+
     // Avoid division by zero
     if (totalCredits === 0) {
       return 0;
     }
-  
+
     return totalPoints / parseInt(filteredData.length);
   };
-  
-  
+
+
   const getDataByGrade = (grade) => {
     switch (grade) {
       case '1':
@@ -148,7 +148,7 @@ const GradeCalculator = () => {
         return [];
     }
   };
-  
+
   const calculateTotalSum = (grade, field) => {
     const data = getDataByGrade(grade);
     return data.reduce((total, row) => parseInt(total) + (parseInt(row[field]) || 0), 0);
@@ -176,13 +176,13 @@ const GradeCalculator = () => {
       return 'F';
     }
   };
-  
-  
-  
+
+
+
   const clamp = (value, min, max) => {
     return Math.min(Math.max(value, min), max);
   };
-  
+
 
   const handleClassificationChange = (event) => {
     setClassification(event.target.value);
@@ -194,7 +194,7 @@ const GradeCalculator = () => {
 
   const handleInputChange = (grade, index, field, value) => {
     let newData;
-  
+
     switch (grade) {
       case '1':
         newData = [...dataGrade1];
@@ -208,7 +208,7 @@ const GradeCalculator = () => {
       default:
         break;
     }
-  
+
     // Check for duplicate "Course Name" values within the same grade
     const isDuplicateCourseName = newData.some((row, i) => i !== index && row.courseName === value);
     if (isDuplicateCourseName) {
@@ -216,10 +216,10 @@ const GradeCalculator = () => {
       alert(`같은 학년에서 중복된 과목명은 허용되지 않습니다.`);
       return;
     }
-  
+
     // Update the specific field in the data
     newData[index][field] = value;
-  
+
     // Update the state based on the grade
     switch (grade) {
       case '1':
@@ -234,11 +234,11 @@ const GradeCalculator = () => {
       default:
         break;
     }
-  
+
     // Clear the error
     setError('');
   };
-  
+
 
   const renderGradeTable = (grade, data, setData, saveDataFn, addRowFn, deleteRowFn) => (
     <div>
@@ -305,61 +305,61 @@ const GradeCalculator = () => {
                 />
               </td>
               {row.credits === 1 ? (
-              <>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              </>
-          ) : (
-            <>
-              <td>
-                <input
-                  type="number"
-                  value={row.attendance}
-                  onChange={(e) => handleInputChange(grade, index, 'attendance', clamp(e.target.value, 0, 20))}
-                  min="0"
-                  max="20"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  value={row.assignment}
-                  onChange={(e) => handleInputChange(grade, index, 'assignment', clamp(e.target.value, 0, 20))}
-                  min="0"
-                  max="20"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  value={row.midterm}
-                  onChange={(e) => handleInputChange(grade, index, 'midterm', clamp(e.target.value, 0, 30))}
-                  min="0"
-                  max="30"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  value={row.final}
-                  onChange={(e) => handleInputChange(grade, index, 'final', clamp(e.target.value, 0, 30))}
-                  min="0"
-                  max="30"
-                />
-              </td>
-              </>
-          )}
+                <>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </>
+              ) : (
+                <>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.attendance}
+                      onChange={(e) => handleInputChange(grade, index, 'attendance', clamp(e.target.value, 0, 20))}
+                      min="0"
+                      max="20"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.assignment}
+                      onChange={(e) => handleInputChange(grade, index, 'assignment', clamp(e.target.value, 0, 20))}
+                      min="0"
+                      max="20"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.midterm}
+                      onChange={(e) => handleInputChange(grade, index, 'midterm', clamp(e.target.value, 0, 30))}
+                      min="0"
+                      max="30"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.final}
+                      onChange={(e) => handleInputChange(grade, index, 'final', clamp(e.target.value, 0, 30))}
+                      min="0"
+                      max="30"
+                    />
+                  </td>
+                </>
+              )}
               <td style={{ textAlign: 'center' }}>{row.total}</td>
-              <td> 
+              <td>
               </td>
-              <td style={{ color: (row.grade === 'F' && row.credits !== 1) || row.grade === 'NP' ? 'red' : 'inherit' ,  textAlign: 'center' }}>
+              <td style={{ color: (row.grade === 'F' && row.credits !== 1) || row.grade === 'NP' ? 'red' : 'inherit', textAlign: 'center' }}>
                 {row.credits === 1 ? 'P' : row.grade}
               </td>
               <td>
                 <button className="delete-button" onClick={() => deleteRowFn(grade, index)}>삭제</button>
-                </td>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -377,7 +377,7 @@ const GradeCalculator = () => {
             >{calculateGrade(
               calculateTotalSum(grade, 'credits'),
               calculateAverage(grade, data),
-              )}
+            )}
             </td>
             <td></td>
           </tr>
