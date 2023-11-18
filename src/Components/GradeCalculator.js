@@ -357,10 +357,10 @@ const GradeCalculator = () => {
               </td>
               </>
           )}
-              <td>{row.total}</td>
-              <td>
+              <td style={{ textAlign: 'center' }}>{row.total}</td>
+              <td> 
               </td>
-              <td style={{ color: (row.grade === 'F' && row.credits !== 1) || row.grade === 'NP' ? 'red' : 'inherit' }}>
+              <td style={{ color: (row.grade === 'F' && row.credits !== 1) || row.grade === 'NP' ? 'red' : 'inherit' ,  textAlign: 'center' }}>
                 {row.credits === 1 ? 'P' : row.grade}
               </td>
               <td>
@@ -372,14 +372,15 @@ const GradeCalculator = () => {
         <tbody>
           <tr>
             <td colSpan="3" style={{ textAlign: 'center' }}>합계</td>
-            <td>{calculateTotalSum(grade, 'credits')}</td>
-            <td>{calculateTotalSum(grade, 'attendance')}</td>
-            <td>{calculateTotalSum(grade, 'assignment')}</td>
-            <td>{calculateTotalSum(grade, 'midterm')}</td>
-            <td>{calculateTotalSum(grade, 'final')}</td>
-            <td>{calculateTotalSum(grade, 'total')}</td>
-            <td>{calculateAverage(grade).toFixed(2)}</td>
-            <td>{calculateGrade(
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'credits')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'attendance')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'assignment')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'midterm')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'final')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateTotalSum(grade, 'total')}</td>
+            <td style={{ textAlign: 'center' }}>{calculateAverage(grade).toFixed(2)}</td>
+            <td style={{ textAlign: 'center', color: (calculateGrade(calculateTotalSum(grade, 'credits'), calculateAverage(grade, data)) === 'F' && data.credits !== 1) ? 'red' : 'inherit' }}
+            >{calculateGrade(
               calculateTotalSum(grade, 'credits'),
               calculateAverage(grade, data),
               )}
