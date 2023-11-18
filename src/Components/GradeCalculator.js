@@ -239,12 +239,6 @@ const GradeCalculator = () => {
     setError('');
   };
   
-  
-  
-  
-  
-  
-
 
   const renderGradeTable = (grade, data, setData, saveDataFn, addRowFn, deleteRowFn) => (
     <div>
