@@ -51,6 +51,20 @@ table {
     display: inline-block;
     transition-duration: 0.1s; /* Smooth transition on hover */
   }
+  .delete-button {
+    width: 45px;
+    height: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    cursor: pointer;
+    position: relative;
+    background-color: #4c93af; /* Green background */
+    color: white; /* White text */
+    border: black; /* Remove borders */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center text */
+    display: inline-block;
+  }
   .action-button:hover {
     background-color: white;
     color: black;

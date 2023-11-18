@@ -363,7 +363,7 @@ const GradeCalculator = () => {
                 {row.credits === 1 ? 'P' : row.grade}
               </td>
               <td>
-                <button onClick={() => deleteRowFn(grade, index)}>삭제</button>
+                <button className="delete-button" onClick={() => deleteRowFn(grade, index)}>삭제</button>
                 </td>
             </tr>
           ))}
