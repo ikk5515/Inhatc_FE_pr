@@ -213,6 +213,7 @@ const GradeCalculator = () => {
     const isDuplicateCourseName = newData.some((row, i) => i !== index && row.courseName === value);
     if (isDuplicateCourseName) {
       setError(`Duplicate "Course Name" values are not allowed within Grade ${grade}.`);
+      alert(`같은 학년에서 중복된 과목명은 허용되지 않습니다.`);
       return;
     }
   
