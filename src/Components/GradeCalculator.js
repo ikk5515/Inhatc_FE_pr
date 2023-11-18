@@ -258,7 +258,7 @@ const GradeCalculator = () => {
             <th>중간고사</th>
             <th>기말고사</th>
             <th>총점</th>
-            <th>평군</th>
+            <th>평균</th>
             <th>성적</th>
             <th colSpan="3">삭제</th>
           </tr>
