@@ -247,25 +247,25 @@ const GradeCalculator = () => {
 
   const renderGradeTable = (grade, data, setData, saveDataFn, addRowFn, deleteRowFn) => (
     <div>
-      <h2>{`Grade ${grade}`}</h2>
-      <button className="action-button" onClick={() => addRowFn(grade)}>Add</button>
-      <button className="action-button" onClick={() => saveDataFn(grade)}>Save</button>
+      <h2>{`${grade}학년`}</h2>
+      <button className="action-button" onClick={() => addRowFn(grade)}>추가</button>
+      <button className="action-button" onClick={() => saveDataFn(grade)}>저장</button>
       <table>
         {/* Table header */}
         <thead>
           <tr>
-            <th>Completed</th>
-            <th>Required</th>
-            <th>Course Name</th>
-            <th>Credits</th>
-            <th>Attendance</th>
-            <th>Assignment</th>
-            <th>Midterm</th>
-            <th>Final</th>
-            <th>Total</th>
-            <th>Average</th>
-            <th>Grade</th>
-            <th colSpan="3">Actions</th>
+            <th>이수</th>
+            <th>필수</th>
+            <th>과목명</th>
+            <th>학점</th>
+            <th>출석점수</th>
+            <th>과제점수</th>
+            <th>중간고사</th>
+            <th>기말고사</th>
+            <th>총점</th>
+            <th>평군</th>
+            <th>성적</th>
+            <th colSpan="3">삭제</th>
           </tr>
         </thead>
 
@@ -279,8 +279,8 @@ const GradeCalculator = () => {
                   value={row.completed}
                   onChange={(e) => handleInputChange(grade, index, 'completed', e.target.value)}
                 >
-                  <option value="Liberal Arts">Liberal Arts</option>
-                  <option value="Majors">Majors</option>
+                  <option value="Liberal Arts">교양</option>
+                  <option value="Majors">전공</option>
                 </select>
               </td>
               <td>
@@ -289,8 +289,8 @@ const GradeCalculator = () => {
                   value={row.required}
                   onChange={(e) => handleInputChange(grade, index, 'required', e.target.value)}
                 >
-                  <option value="Required">Required</option>
-                  <option value="Optional">Optional</option>
+                  <option value="Required">필수</option>
+                  <option value="Optional">선택</option>
                 </select>
               </td>
               <td>
@@ -363,14 +363,14 @@ const GradeCalculator = () => {
                 {row.credits === 1 ? 'P' : row.grade}
               </td>
               <td>
-                <button onClick={() => deleteRowFn(grade, index)}>Delete</button>
+                <button onClick={() => deleteRowFn(grade, index)}>삭제</button>
                 </td>
             </tr>
           ))}
         </tbody>
         <tbody>
           <tr>
-            <td colSpan="3" style={{ textAlign: 'center' }}>Total</td>
+            <td colSpan="3" style={{ textAlign: 'center' }}>합계</td>
             <td>{calculateTotalSum(grade, 'credits')}</td>
             <td>{calculateTotalSum(grade, 'attendance')}</td>
             <td>{calculateTotalSum(grade, 'assignment')}</td>
