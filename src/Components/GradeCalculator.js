@@ -119,15 +119,10 @@ const GradeCalculator = () => {
 
   const calculateAverage = (grade) => {
     const data = getDataByGrade(grade);
-
-    // Filter out rows with Credits equal to 1
     const filteredData = data.filter((row) => parseInt(row.credits) !== 1);
-
-    // Calculate total credits and total points for the filtered data
     const totalCredits = filteredData.reduce((total, row) => parseInt(total) + parseInt(row.credits || 0), 0);
     const totalPoints = filteredData.reduce((total, row) => parseInt(total) + parseInt(row.total || 0), 0);
 
-    // Avoid division by zero
     if (totalCredits === 0) {
       return 0;
     }
@@ -177,12 +172,9 @@ const GradeCalculator = () => {
     }
   };
 
-
-
   const clamp = (value, min, max) => {
     return Math.min(Math.max(value, min), max);
   };
-
 
   const handleClassificationChange = (event) => {
     setClassification(event.target.value);
@@ -209,18 +201,14 @@ const GradeCalculator = () => {
         break;
     }
 
-    // Check for duplicate "Course Name" values within the same grade
     const isDuplicateCourseName = newData.some((row, i) => i !== index && row.courseName === value);
     if (isDuplicateCourseName) {
       setError(`Duplicate "Course Name" values are not allowed within Grade ${grade}.`);
       alert(`같은 학년에서 중복된 과목명은 허용되지 않습니다.`);
       return;
     }
-
-    // Update the specific field in the data
     newData[index][field] = value;
 
-    // Update the state based on the grade
     switch (grade) {
       case '1':
         setDataGrade1(newData);
@@ -234,8 +222,6 @@ const GradeCalculator = () => {
       default:
         break;
     }
-
-    // Clear the error
     setError('');
   };
 
@@ -246,7 +232,6 @@ const GradeCalculator = () => {
       <button className="action-button" onClick={() => addRowFn(grade)}>추가</button>
       <button className="action-button" onClick={() => saveDataFn(grade)}>저장</button>
       <table>
-        {/* Table header */}
         <thead>
           <tr>
             <th>이수</th>
@@ -263,8 +248,6 @@ const GradeCalculator = () => {
             <th colSpan="3">삭제</th>
           </tr>
         </thead>
-
-        {/* Table body */}
         <tbody>
           {data.map((row, index) => (
             <tr key={index}>
